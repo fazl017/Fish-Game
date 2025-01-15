@@ -42,16 +42,17 @@ class Game():
 
 
 class Fish(sprite.Sprite):
-    def __init__(self):
-        pass
-
-    def update(self, ):
-        pass
-
+    pass
 
 
 class Balikci (sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
+        self.image = image.load("fisherman (1).png")
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.life = 3
+        self.speed = 10
+    def update(self, ):
         pass
 
     def update(self,):
