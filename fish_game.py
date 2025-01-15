@@ -3,3 +3,6 @@ from random import *
 
 init()
 
+genislik, yukseklik= 600,600
+
+win = display.set_mode((genislik,yukseklik))
