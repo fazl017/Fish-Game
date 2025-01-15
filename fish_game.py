@@ -56,12 +56,24 @@ class Balikci (sprite.Sprite):
         pass
 
     def update(self,):
-        pass
+        self.hareket()
 
     def hareket(self):
-        pass
+        tus = key.get_pressed()
 
+        if tus[K_LEFT]:
+            self.rect.x -= self.speed
 
+        elif tus[K_RIGHT]:
+            self.rect.x += self.speed
+
+        elif tus[K_UP]:
+            self.rect.y -= self.speed
+
+        elif tus[K_LEFT]:
+            self.rect.y += self.speed
+        elif tus[K_DOWN]:
+            self.rect.x -= self.speed
 
 
 durum = True
