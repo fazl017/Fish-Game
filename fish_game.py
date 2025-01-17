@@ -48,7 +48,7 @@ class Fish(sprite.Sprite):
 class Balikci (sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = image.load("fisherman (1).png")
+        self.image = image.load("fisherman.png")
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.life = 3
@@ -76,7 +76,7 @@ class Balikci (sprite.Sprite):
 
 fisherman_group = sprite.Group()
 fisherman =Balikci(genislik // 2, yukseklik // 2)
-fisherman_group.add()
+fisherman_group.add(fisherman)
 
 
 durum = True
@@ -85,6 +85,9 @@ while durum:
        if i.type == QUIT:
            durum = False
 
+    fisherman_group.update()
+    fisherman_group.draw(win)
     display.update()
-    clock.tick()
+    win.fill((0,0,0))
+    clock.tick(fps)
 quit()
