@@ -47,6 +47,7 @@ class Fish(sprite.Sprite):
 
 class Balikci (sprite.Sprite):
     def __init__(self, x, y):
+        super().__init__()
         self.image = image.load("fisherman (1).png")
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -70,10 +71,12 @@ class Balikci (sprite.Sprite):
         elif tus[K_UP]:
             self.rect.y -= self.speed
 
-        elif tus[K_LEFT]:
-            self.rect.y += self.speed
         elif tus[K_DOWN]:
-            self.rect.x -= self.speed
+            self.rect.y += self.speed
+
+fisherman_group = sprite.Group()
+fisherman =Balikci(genislik // 2, yukseklik // 2)
+fisherman_group.add()
 
 
 durum = True
