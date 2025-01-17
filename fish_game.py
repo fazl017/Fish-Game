@@ -43,6 +43,7 @@ class Game():
 
 class Fish(sprite.Sprite):
     def __init__(self,x,y,image,type):
+        super().__init__()
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft=(x,y)
@@ -95,6 +96,17 @@ fisherman =Balikci(genislik // 2, yukseklik // 2)
 fisherman_group.add(fisherman)
 
 
+
+fish2 = image.load("fish.png")
+fish_group =sprite.Group()
+fish = Fish(randint(0,genislik-32),randint(0,yukseklik-32),fish2,0)
+fish_group.add(fish)
+
+fish1 = image.load("clown-fish.png")
+fish_group =sprite.Group()
+fish = Fish(randint(0,genislik-32),randint(0,yukseklik-32),fish1,0)
+fish_group.add(fish)
+
 durum = True
 while durum:
     for i in event.get():
@@ -103,6 +115,8 @@ while durum:
 
     fisherman_group.update()
     fisherman_group.draw(win)
+    fish_group.update()
+    fish_group.draw(win)
     display.update()
     win.fill((0,0,0))
     clock.tick(fps)
