@@ -42,7 +42,23 @@ class Game():
 
 
 class Fish(sprite.Sprite):
-    pass
+    def __init__(self,x,y,image,type):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.topleft=(x,y)
+        self.type = type
+        self.speed = randint(1,7)
+        self.direction_X =choice([-1,1])
+        self.direction_Y = choice([-1,1])
+
+    def update(self,):
+        self.rect.x += self.speed*self.direction_X
+        self.rect.y += self.speed*self.direction_Y
+        if self.rect.left<=0 or self.rect.right>=genislik:
+            self.direction_X*=-1
+        if self.rect.top<=0 or self.rect.bottom>=yukseklik:
+            self.direction_Y*=-1
+
 
 
 class Balikci (sprite.Sprite):
