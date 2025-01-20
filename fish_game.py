@@ -13,14 +13,37 @@ clock = time.Clock()
 
 
 class Game():
-    def __init__(self):
-        pass
+    def __init__(self,fisherman,fish_geoup):
+        self.fisherman = fisherman
+        self.fish = fish_geoup
+        self.time = 0
+        self.fps_deger_sayaci = 0
+        self.level = 0
+        fish1 = image.load("fish.png")
+        fish2 = image.load("fish (1).png")
+        fish3 = image.load("goldfish.png")
+        fish4 = image.load("clown-fish.png")
+        self.fish_list = [fish1,fish2,fish3,fish4]
+        self.fish_list_index_no = randint(0,3)
+        self.goal_fish_image =  self.fish_list[self.fish_list_index_no]
+        self.goal_fish_location = self.goal_fish_image.get_rect()
+        self.goal_fish_location.top = 40
+        self.goal_fish_location.centerx = genislik/2
+
+        
+
+
+
 
     def update(self):
-        pass
+        self.fps_deger_sayaci +=1
+        if self.fps_deger_sayaci == fps:
+            self.time += 1
+            print(self.time)
+            self.fps_deger_sayaci = 0
 
     def cizdir(self):
-        pass
+        win.blit(self.goal_fish_image,self.goal_fish_location)
 
     def temas(self):
         pass
@@ -99,13 +122,14 @@ fisherman_group.add(fisherman)
 
 fish2 = image.load("fish.png")
 fish_group =sprite.Group()
-fish = Fish(randint(0,genislik-32),randint(0,yukseklik-32),fish2,0)
-fish_group.add(fish)
+fish2 = Fish(randint(0,genislik-32),randint(0,yukseklik-32),fish2,0)
+fish_group.add(fish2)
 
 fish1 = image.load("clown-fish.png")
 fish_group =sprite.Group()
 fish = Fish(randint(0,genislik-32),randint(0,yukseklik-32),fish1,0)
-fish_group.add(fish)
+fish_group.add((fish,fish2))
+game = Game(fisherman,fish)
 
 durum = True
 while durum:
@@ -115,9 +139,12 @@ while durum:
 
     fisherman_group.update()
     fisherman_group.draw(win)
+    game.update()
+    game.cizdir()
     fish_group.update()
     fish_group.draw(win)
     display.update()
     win.fill((0,0,0))
+    game.update()
     clock.tick(fps)
 quit()
