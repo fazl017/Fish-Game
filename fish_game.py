@@ -29,6 +29,11 @@ class Game():
         self.goal_fish_location = self.goal_fish_image.get_rect()
         self.goal_fish_location.top = 40
         self.goal_fish_location.centerx = genislik/2
+        self.game_font = font.Font("Roboto-VariableFont_wdth,wght.ttf",40)
+        self.fishing = mixer.Sound("levelUp.wav")
+        self.The_sound_of_dying = mixer.Sound("game-over-arcade-6435.mp3")
+        mixer.music.load("Background sound effect.mp3")
+        mixer.music.play(-1)
 
         
 
