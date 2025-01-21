@@ -3,7 +3,7 @@ from random import *
 
 init()
 
-genislik, yukseklik= 600,600
+genislik, yukseklik= 600, 600
 
 win = display.set_mode((genislik,yukseklik))
 
@@ -34,8 +34,9 @@ class Game():
         self.The_sound_of_dying = mixer.Sound("game-over-arcade-6435.mp3")
         mixer.music.load("Background sound effect.mp3")
         mixer.music.play(-1)
+        self.game_backgrauond = image.load("Underwater Cave.jpeg")
+        self.game_over = image.load("game_over.jpg")
 
-        
 
 
 
@@ -48,7 +49,24 @@ class Game():
             self.fps_deger_sayaci = 0
 
     def cizdir(self):
+        text = self.game_font.render("Time : " + str(self.time),True, (255,255,255))
+        text_locastion = text.get_rect()
+        text_locastion.top=30
+        text_locastion.left=30
+
+        text2 = self.game_font.render("Life: "+ str(self.fisherman.life),True, (255,255,255))
+        text2_locastion = text2.get_rect()
+        text2_locastion.top= 30
+        text2_locastion.left = genislik-150
+        win.blit(self.game_backgrauond,(0,0))
+        win.blit(text,text_locastion)
+        win.blit(text2,text2_locastion)
+
+
         win.blit(self.goal_fish_image,self.goal_fish_location)
+        draw.rect(win,(255,0,0),(275,30,50,40),5)
+        draw.rect(win,(255,255,255),(0,100,600,yukseklik-100),1)
+
 
     def temas(self):
         pass
@@ -142,11 +160,11 @@ while durum:
        if i.type == QUIT:
            durum = False
 
-    fisherman_group.update()
-    fisherman_group.draw(win)
     game.update()
     game.cizdir()
     fish_group.update()
+    fisherman_group.update()
+    fisherman_group.draw(win)
     fish_group.draw(win)
     display.update()
     win.fill((0,0,0))
