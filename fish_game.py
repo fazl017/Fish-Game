@@ -1,5 +1,6 @@
 from pygame import *
 from random import *
+import pygame
 
 init()
 
@@ -15,7 +16,7 @@ clock = time.Clock()
 class Game():
     def __init__(self,fisherman,fish_geoup):
         self.fisherman = fisherman
-        self.fish = fish_geoup
+        self.fish = fish_group
         self.time = 0
         self.fps_deger_sayaci = 0
         self.level = 0
@@ -47,6 +48,7 @@ class Game():
             self.time += 1
             print(self.time)
             self.fps_deger_sayaci = 0
+        self.temas()
 
     def cizdir(self):
         text = self.game_font.render("Time : " + str(self.time),True, (255,255,255))
@@ -68,8 +70,26 @@ class Game():
         draw.rect(win,(255,255,255),(0,100,600,yukseklik-100),1)
 
 
+
     def temas(self):
-        pass
+        contacted = pygame.sprite.spritecollideany(self.fisherman,self.fish)
+        if contacted:
+            if contacted.type == self.fish_list_index_no:
+                contacted.remove(self.fish)
+                self.fishing.play()
+                if self.fish:
+                     self.hedef_yenile()
+                else:
+                    self.hedefle()
+            else:
+                 self.fisherman.life -= 1
+                 self.The_sound_of_dying.play()
+                 self.guvenli_alan()
+                 if  self.fisherman.life():
+                     self.stop()
+
+
+
 
     def stop(self):
         pass
@@ -82,7 +102,6 @@ class Game():
 
     def hedef_yenile(self):
         pass
-
     def hedefle(self):
         pass
 
