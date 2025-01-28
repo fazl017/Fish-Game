@@ -85,7 +85,7 @@ class Game():
                  self.fisherman.life -= 1
                  self.The_sound_of_dying.play()
                  self.guvenli_alan()
-                 if  self.fisherman.life():
+                 if  self.fisherman.life<=0:
                      self.stop()
 
 
@@ -101,9 +101,20 @@ class Game():
         pass
 
     def hedef_yenile(self):
-        pass
+        goal_fish = choice(self.fish.sprites())
+        self.goal_fish_image = goal_fish.image
+        self.fish_list_index_no = goal_fish.type
+
     def hedefle(self):
-        pass
+        self.level += 1
+        for balik in self.fish:
+            self.fish.remove(balik)
+        for x in range(self.level):
+            self.fish.add(Fish(randint(0,genislik-32),randint(105,yukseklik-105),self.fish_list[0],0))
+            self.fish.add(Fish(randint(0,genislik-32),randint(105,yukseklik-105),self.fish_list[1],1))
+            self.fish.add(Fish(randint(0,genislik-32),randint(105,yukseklik-105),self.fish_list[2],2))
+            self.fish.add(Fish(randint(0,genislik-32),randint(105,yukseklik-105),self.fish_list[3],3))
+
 
 
 class Fish(sprite.Sprite):
@@ -122,7 +133,7 @@ class Fish(sprite.Sprite):
         self.rect.y += self.speed*self.direction_Y
         if self.rect.left<=0 or self.rect.right>=genislik:
             self.direction_X*=-1
-        if self.rect.top<=0 or self.rect.bottom>=yukseklik:
+        if self.rect.top<=100 or self.rect.bottom>=yukseklik:
             self.direction_Y*=-1
 
 
@@ -157,21 +168,15 @@ class Balikci (sprite.Sprite):
             self.rect.y += self.speed
 
 fisherman_group = sprite.Group()
-fisherman =Balikci(genislik // 2, yukseklik // 2)
+fisherman =Balikci(genislik // 2, yukseklik // 2
+                   )
 fisherman_group.add(fisherman)
 
-
-
-fish2 = image.load("fish.png")
 fish_group =sprite.Group()
-fish2 = Fish(randint(0,genislik-32),randint(0,yukseklik-32),fish2,0)
-fish_group.add(fish2)
 
-fish1 = image.load("clown-fish.png")
-fish_group =sprite.Group()
-fish = Fish(randint(0,genislik-32),randint(0,yukseklik-32),fish1,0)
-fish_group.add((fish,fish2))
-game = Game(fisherman,fish)
+game = Game(fisherman,fish_group)
+game.hedefle()
+
 
 durum = True
 while durum:
