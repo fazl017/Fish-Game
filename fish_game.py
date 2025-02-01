@@ -174,16 +174,16 @@ class Balikci (sprite.Sprite):
     def hareket(self):
         tus = key.get_pressed()
 
-        if tus[K_LEFT]:
+        if tus[K_LEFT] and self.rect.left > 0:
             self.rect.x -= self.speed
 
-        elif tus[K_RIGHT]:
+        elif tus[K_RIGHT] and self.rect.right < 600:
             self.rect.x += self.speed
 
-        elif tus[K_UP]:
+        elif tus[K_UP] and self.rect.top > 0:
             self.rect.y -= self.speed
 
-        elif tus[K_DOWN]:
+        elif tus[K_DOWN] and self.rect.bottom < 600:
             self.rect.y += self.speed
 
 fisherman_group = sprite.Group()
