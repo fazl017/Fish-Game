@@ -18,6 +18,7 @@ class Game():
         self.fisherman = fisherman
         self.fish = fish_group
         self.time = 0
+        self.skor = 0
         self.fps_deger_sayaci = 0
         self.level = 0
         fish1 = image.load("fish.png")
@@ -29,7 +30,7 @@ class Game():
         self.goal_fish_image =  self.fish_list[self.fish_list_index_no]
         self.goal_fish_location = self.goal_fish_image.get_rect()
         self.goal_fish_location.top = 40
-        self.goal_fish_location.centerx = genislik/2
+        self.goal_fish_location.centerx = 225
         self.game_font = font.Font("Roboto-VariableFont_wdth,wght.ttf",40)
         self.fishing = mixer.Sound("levelUp.wav")
         self.The_sound_of_dying = mixer.Sound("game-over-arcade-6435.mp3")
@@ -56,17 +57,23 @@ class Game():
         text_locastion.top=30
         text_locastion.left=30
 
-        text2 = self.game_font.render("Life: "+ str(self.fisherman.life),True, (255,255,255))
+        text2 = self.game_font.render("Skor : " + str(self.skor),True,(255,255,255))
         text2_locastion = text2.get_rect()
-        text2_locastion.top= 30
-        text2_locastion.left = genislik-150
+        text2_locastion.top = 30
+        text2_locastion.left = 280
+
+        text3 = self.game_font.render("Life: " + str(self.fisherman.life), True, (255, 255, 255))
+        text3_locastion = text3.get_rect()
+        text3_locastion.top= 30
+        text3_locastion.left = genislik-150
         win.blit(self.game_backgrauond,(0,0))
         win.blit(text,text_locastion)
         win.blit(text2,text2_locastion)
+        win.blit(text3, text3_locastion)
 
 
         win.blit(self.goal_fish_image,self.goal_fish_location)
-        draw.rect(win,(255,0,0),(275,30,50,40),5)
+        draw.rect(win,(255,0,0),(200,30,50,40),5)
         draw.rect(win,(255,255,255),(0,100,600,yukseklik-100),1)
 
 
@@ -79,6 +86,7 @@ class Game():
                 self.fishing.play()
                 if self.fish:
                      self.hedef_yenile()
+                     self.skor += 1
                 else:
                     self.hedefle()
             else:
