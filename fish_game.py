@@ -36,7 +36,7 @@ class Game():
         mixer.music.load("Background sound effect.mp3")
         mixer.music.play(-1)
         self.game_backgrauond = image.load("Underwater Cave.jpeg")
-        self.game_over = image.load("game_over.jpg")
+        self.game_over = image.load("Game Over Clipart Vector, Game Over Png Design, End, Play, Creative PNG Image For Free Download.jpeg")
 
 
 
@@ -92,14 +92,33 @@ class Game():
 
 
     def stop(self):
-        pass
+        global durum
+        win.blit(self.game_over,(0,0))
+        display.update()
+        the_game_has_stopped = True
+        while the_game_has_stopped:
+            for i in  event.get():
+                if i.type == KEYDOWN:
+                    if i.key == K_SPACE:
+                         self.reset()
+                         the_game_has_stopped = False
+                if i.type == QUIT:
+                    the_game_has_stopped = False
+                    durum = False
+
+
+
+
 
     def reset(self):
-        pass
+        self.fisherman.life = 3
+        self.level = 0
+        self.hedefle()
+        self.guvenli_alan()
+
 
     def guvenli_alan(self):
-        pass
-
+        self.fisherman.rect.top = yukseklik - 550
     def hedef_yenile(self):
         goal_fish = choice(self.fish.sprites())
         self.goal_fish_image = goal_fish.image
