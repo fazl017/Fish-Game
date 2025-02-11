@@ -34,10 +34,10 @@ class Game():
         self.game_font = font.Font("Roboto-VariableFont_wdth,wght.ttf",40)
         self.fishing = mixer.Sound("levelUp.wav")
         self.The_sound_of_dying = mixer.Sound("game-over-arcade-6435.mp3")
-        mixer.music.load("Background sound effect.mp3")
-        mixer.music.play(-1)
+        self.valume = mixer.music.load("Background sound effect.mp3")
+        self.valume2 = mixer.music.play()
         self.game_backgrauond = image.load("Underwater Cave.jpeg")
-        self.game_over = image.load("Game Over Clipart Vector, Game Over Png Design, End, Play, Creative PNG Image For Free Download.jpeg")
+        self.game_over = image.load("Game Over HD Mobile Wallpaper1_.jpg")
 
 
 
@@ -47,7 +47,6 @@ class Game():
         self.fps_deger_sayaci +=1
         if self.fps_deger_sayaci == fps:
             self.time += 1
-            print(self.time)
             self.fps_deger_sayaci = 0
         self.temas()
 
@@ -102,6 +101,7 @@ class Game():
     def stop(self):
         global durum
         win.blit(self.game_over,(0,0))
+        self.valume2 = mixer.music.stop()
         display.update()
         the_game_has_stopped = True
         while the_game_has_stopped:
@@ -123,7 +123,9 @@ class Game():
         self.level = 0
         self.hedefle()
         self.guvenli_alan()
-
+        self.skor = 0
+        self.time = 0
+        self.valume2 = mixer.music.play(-1)
 
     def guvenli_alan(self):
         self.fisherman.rect.top = yukseklik - 550
